@@ -1,14 +1,22 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+// import { useState } from 'react'
 import './App.css'
+import { Route, Routes } from 'react-router-dom'
+import Login from './pages/Login'
+import NewList from './pages/NewList'
+import AllLists from './pages/AllLists'
+import ShoppingList from './pages/ShoppingList'
 
 function App() {
-  const [count, setCount] = useState(0)
+  // const [count, setCount] = useState(0)
 
   return (
     <>
-      <h1>Lista de Compras - Marei</h1>
+      <Routes>
+        <Route exact path="/lists/:id" element={ ShoppingList } />
+        <Route exact path="/lists" element={ AllLists } />
+        <Route path="/new" element={ NewList } />
+        <Route exact path="/" element={ <Login /> } />
+      </Routes>
     </>
   )
 }
