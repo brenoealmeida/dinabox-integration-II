@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './Button.module.css';
 
 function Button({ children, type = 'button', onClick, disabled = false }) {
