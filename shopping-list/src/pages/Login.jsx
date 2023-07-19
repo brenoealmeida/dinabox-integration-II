@@ -1,11 +1,13 @@
 import Button from '../components/Button';
 import Form from '../components/Form';
 import Input from '../components/Input';
+import Context from '../context/Context';
 import styles from './Login.module.css';
 
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 function Login() {
+    const { onLogin } = useContext(Context);
 
     const [login, setLogin] = useState({
         email: '',
