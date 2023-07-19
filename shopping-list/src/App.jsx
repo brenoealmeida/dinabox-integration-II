@@ -12,9 +12,9 @@ function App() {
   return (
     <>
       <Routes>
-        <Route exact path="/lists/:id" element={ ShoppingList } />
-        <Route exact path="/lists" element={ AllLists } />
-        <Route path="/new" element={ NewList } />
+        <Route exact path="/lists/:id" element={ <ShoppingList /> } />
+        <Route exact path="/lists" element={ <AllLists /> } />
+        <Route path="/new" element={ <NewList /> } />
         <Route exact path="/" element={ <Login /> } />
       </Routes>
     </>

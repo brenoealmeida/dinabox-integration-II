@@ -7,13 +7,14 @@ function Provider({children}){
   const navigate = useNavigate();
 
   const onLogin = (login) => {
+    console.log(login);
     setUser(login);
     navigate('/new');
   }
 
   const context_value = {
     user,
-    onLogin,
+    onLogin
   }
 
   return (

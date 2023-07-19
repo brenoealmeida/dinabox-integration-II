@@ -16,6 +16,7 @@ function Login() {
     const disabled = !login.email || !login.password;
 
     const handleChange = ({target}) => {
+        console.log('teste');
         const { name, value } = target
         setLogin((prev) => {
             return {
@@ -26,7 +27,9 @@ function Login() {
     }
 
     const handleSubmit = (e) => {
+        console.log('teste');
         e.preventDefault();
+        onLogin(login);
     }
 
     return (
@@ -45,8 +48,8 @@ function Login() {
                     required
                     onChange={handleChange}
                     />
+                <Button type="submit" disabled={disabled}>Enviar</Button>
             </Form>
-            <Button type='submit' disabled={disabled}>Enviar</Button>
         </section>
     )
 }
