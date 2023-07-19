@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Context from "./Context";
 
@@ -6,16 +6,15 @@ function Provider({children}){
   const [user, setUser] = useState('');
   const navigate = useNavigate();
 
-  const onLogin = (login) => {
-    console.log(login);
+  const onLogin = useCallback((login) => {
     setUser(login);
     navigate('/new');
-  }
+  }, [navigate, setUser])
 
-  const context_value = {
+  const context_value = useMemo(() => ({
     user,
     onLogin
-  }
+  }), [user, onLogin])
 
   return (
     <Context.Provider value={context_value}>
