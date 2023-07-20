@@ -7,7 +7,7 @@ import styles from './Login.module.css';
 import { useContext, useState } from 'react';
 
 function Login() {
-    const { onLogin } = useContext(Context);
+    const { onLogin, loading } = useContext(Context);
 
     const [login, setLogin] = useState({
         email: '',
@@ -16,7 +16,6 @@ function Login() {
     const disabled = !login.email || !login.password;
 
     const handleChange = ({target}) => {
-        console.log('teste');
         const { name, value } = target
         setLogin((prev) => {
             return {
@@ -26,9 +25,9 @@ function Login() {
         })
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
-        onLogin(login);
+        await onLogin(login);
     }
 
     return (
@@ -49,6 +48,7 @@ function Login() {
                     />
                 <Button type="submit" disabled={disabled}>Enviar</Button>
             </Form>
+            { loading ? <p>Carregando...</p> : null }
         </section>
     )
 }
