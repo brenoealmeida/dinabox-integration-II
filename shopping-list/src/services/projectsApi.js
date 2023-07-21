@@ -1,12 +1,18 @@
 import axios from 'axios';
 
-async function projectsApi(token) {
+async function projectsApi(token, id) {
     const URL = 'https://www.dinabox.app/api/v1/project'
     
     const response = await axios.get(URL, {
-
+        headers: {
+            Authorization: `Bearer ${token}`
+        },
+        params: {
+            project_id: id,
+        }
     })
         .then((response) => {
+            console.log(response);
             return response;
         })
         .catch((e) => {
@@ -14,7 +20,7 @@ async function projectsApi(token) {
             alert('Tente Novamente');
         })
     
-    return response.data.token;
+    return response.data;
 }
 
 export default projectsApi;

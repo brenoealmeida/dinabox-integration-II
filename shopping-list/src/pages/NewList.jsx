@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Context from "../context/Context";
 import Form from '../components/Form';
 import Input from '../components/Input';
 import Button from "../components/Button";
+import projectsApi from "../services/projectsApi";
 
 function NewList() {
-    // const { token } = useContext(Context);
+    const { token } = useContext(Context);
     const [ids, setIds] = useState({})
     
     const handleSubmit = (e) => {
@@ -47,7 +48,11 @@ function NewList() {
         })
     }
 
-    const handleRemove = () => {
+    useEffect(() => {
+        projectsApi(token, '0025124307');
+    },[])
+
+    const handleRemoveButton = () => {
         setInputs((prev) => {
             return prev.filter((_e, index) => index != prev.length - 1)
         })
@@ -64,7 +69,7 @@ function NewList() {
                 }
                 <Button type="button" onClick={handleClick}>Adicionar projeto à lista</Button>
                 <p></p>
-                <Button type="button" onClick={handleRemove}>Remover último projeto</Button>
+                <Button type="button" onClick={handleRemoveButton}>Remover último projeto</Button>
                 <p></p>
                 <Button type="submit">Enviar</Button>
             </Form>
