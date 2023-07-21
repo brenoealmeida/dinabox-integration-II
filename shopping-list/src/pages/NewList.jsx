@@ -6,20 +6,12 @@ import Button from "../components/Button";
 
 function NewList() {
     // const { token } = useContext(Context);
-    const [inputs, setInputs] = useState([(
-        <Input placeholder='Digite o ID do projeto'
-            type='number'
-            name={`id_0`}
-            key={0}
-            onChange={handleChange}
-            />
-        )]);
     const [ids, setIds] = useState({})
-
+    
     const handleSubmit = (e) => {
         e.preventDefault();
     }
-
+    
     const handleChange = ({target}) => {
         const { key, value } = target;
         setIds((prev) => {
@@ -29,6 +21,15 @@ function NewList() {
             }
         })
     }
+    
+    const [inputs, setInputs] = useState([(
+        <Input placeholder='Digite o ID do projeto'
+            type='number'
+            name={`id_0`}
+            key={0}
+            onChange={handleChange}
+            />
+        )]);
 
     const handleClick = () => {
         const num = inputs.length;
@@ -46,6 +47,12 @@ function NewList() {
         })
     }
 
+    const handleRemove = () => {
+        setInputs((prev) => {
+            return prev.filter((_e, index) => index != prev.length - 1)
+        })
+    }
+
     return (
         <main>
             <h2>Criar nova lista de compras:</h2>
@@ -56,6 +63,8 @@ function NewList() {
                    })
                 }
                 <Button type="button" onClick={handleClick}>Adicionar projeto à lista</Button>
+                <p></p>
+                <Button type="button" onClick={handleRemove}>Remover último projeto</Button>
                 <p></p>
                 <Button type="submit">Enviar</Button>
             </Form>
