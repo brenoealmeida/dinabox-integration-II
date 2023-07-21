@@ -1,53 +1,65 @@
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import Context from "../context/Context";
 import Form from '../components/Form';
 import Input from '../components/Input';
 import Button from "../components/Button";
 
 function NewList() {
-    const { token } = useContext(Context);
-    const [inputs, setInputs] = useState([0]);
-
-    useEffect(() => {
-        console.log(token);
-    }, [])
+    // const { token } = useContext(Context);
+    const [inputs, setInputs] = useState([(
+        <Input placeholder='Digite o ID do projeto'
+            type='number'
+            name={`id_0`}
+            key={0}
+            onChange={handleChange}
+            />
+        )]);
+    const [ids, setIds] = useState({})
 
     const handleSubmit = (e) => {
         e.preventDefault();
     }
 
-    const handleChange = () => {
-        
-    }
-
-    const handleClick = () => {
-        setInputs((prev) => {
-            const num = prev.length;
+    const handleChange = ({target}) => {
+        const { key, value } = target;
+        setIds((prev) => {
             return {
                 ...prev,
-                num
+                [key]: value,
             }
         })
     }
 
+    const handleClick = () => {
+        const num = inputs.length;
+        const inputTemplate = (<Input placeholder='Digite o ID do projeto'
+            type='number'
+            name={`id_${num}`}
+            key={num}
+            onChange={handleChange}
+        />)
+        setInputs((prev) => {
+            return [
+                ...prev,
+                inputTemplate
+            ]
+        })
+    }
+
     return (
-        <section>
+        <main>
             <h2>Criar nova lista de compras:</h2>
             <Form onSubmit={handleSubmit}>
                 {
-                    inputs.map((index) => (
-                        <Input placeholder='Digite o ID do projeto'
-                            type='number'
-                            name={`id_${index}`}
-                            key={index}
-                            onChange={handleChange}
-                            />
-                    ))
+                   inputs.map((e) => {
+                        return e;
+                   })
                 }
                 <Button type="button" onClick={handleClick}>Adicionar projeto à lista</Button>
+                <p></p>
                 <Button type="submit">Enviar</Button>
             </Form>
-        </section>
+        </main>
     )
 }
 
