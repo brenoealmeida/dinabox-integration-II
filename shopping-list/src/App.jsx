@@ -1,9 +1,9 @@
 // import { useState } from 'react'
-import './App.css'
 import { Route, Routes } from 'react-router-dom'
+import './App.css'
+import AllLists from './pages/AllLists'
 import Login from './pages/Login'
 import NewList from './pages/NewList'
-import AllLists from './pages/AllLists'
 import ShoppingList from './pages/ShoppingList'
 
 function App() {
@@ -12,8 +12,8 @@ function App() {
   return (
     <>
       <Routes>
-        <Route exact path="/lists/:id" element={ <ShoppingList /> } />
-        <Route exact path="/lists" element={ <AllLists /> } />
+        <Route exact path="/list" element={ <ShoppingList /> } />
+        <Route exact path="/allLists" element={ <AllLists /> } />
         <Route path="/new" element={ <NewList /> } />
         <Route exact path="/" element={ <Login /> } />
       </Routes>

@@ -1,14 +1,13 @@
-import { useEffect, useState, useContext } from "react";
-import Context from "../context/Context";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Button from "../components/Button";
 import Form from '../components/Form';
 import Input from '../components/Input';
-import Button from "../components/Button";
-import { useNavigate } from "react-router-dom";
+import Context from "../context/Context";
 // import projectsApi from "../services/projectsApi";
 
 function NewList() {
-    const { token } = useContext(Context);
-    // const [ids, setIds] = useState({})
+    const { token, setIds } = useContext(Context);
     const navigate = useNavigate()
     
     useEffect(() => {
@@ -18,13 +17,13 @@ function NewList() {
     }, [])
 
     const handleChange = ({target}) => {
-        const { key, value } = target;
-        /* setIds((prev) => {
+        const { name, value } = target;
+        setIds((prev) => {
             return {
                 ...prev,
-                [key]: value,
+                [name]: value,
             }
-        }) */
+        })
     }
     
     const [inputs, setInputs] = useState([(
@@ -38,6 +37,7 @@ function NewList() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        navigate('/list')
     }
 
     const handleAddButton = () => {

@@ -12,7 +12,6 @@ async function projectsApi(token, id) {
         }
     })
         .then((response) => {
-            console.log(response);
             return response;
         })
         .catch((e) => {
