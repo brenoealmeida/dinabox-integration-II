@@ -1,5 +1,4 @@
-import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
 import Button from "../components/Button";
 import Form from '../components/Form';
 import Input from '../components/Input';
@@ -7,14 +6,7 @@ import Context from "../context/Context";
 // import projectsApi from "../services/projectsApi";
 
 function NewList() {
-    const { token, setIds } = useContext(Context);
-    const navigate = useNavigate()
-    
-    useEffect(() => {
-        if (!token) { 
-            navigate('/')
-        }
-    }, [])
+    const { setIds, submitNewList } = useContext(Context);
 
     const handleChange = ({target}) => {
         const { name, value } = target;
@@ -35,9 +27,9 @@ function NewList() {
             />
         )]);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        navigate('/list')
+        await submitNewList();
     }
 
     const handleAddButton = () => {
