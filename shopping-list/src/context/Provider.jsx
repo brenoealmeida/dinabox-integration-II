@@ -22,24 +22,28 @@ function Provider({children}){
   }, [navigate, setUser, setLoading, setToken])
 
   const getProjectsById = async (token, ids) => {
-    const result = Object.values(ids).map(async (id) => {
+    const projects = Object.values(ids).map(async (id) => {
       const data = await projectsApi(token, id);
       console.log(data);
-      return dataToShoppingList(data);
+      return data;
     })
-    return result;
+    return dataToShoppingList(projects);
   }
 
-  const submitNewList = useCallback(async () => {
+  const submitNewList = useCallback( async () => {
     console.log('inside submitNewList function');
     setLoading(true)
     if(Object.keys(ids).length === 0) {
       navigate('/');
     }
     const result = await getProjectsById(token, ids);
+
+    console.log(result)
+
     setLoading(false);
     navigate('/list');
-  }, [])
+    console.log('finalizou api');
+  }, [navigate, setLoading, ids, token])
 
   const context_value = useMemo(() => ({
     user,
@@ -47,7 +51,7 @@ function Provider({children}){
     token,
     loading,
     setLoading,
-    getProjectsById,
+   // getProjectsById,
     setIds,
     ids,
     submitNewList,

@@ -26,11 +26,9 @@ function jointSystemProcessor(data) {
 function dataToShoppingList (data) {
   const jointSystem = data.holes;
   const modules = data.woodwork;
-  const extraComponents = data.components.data;
+  const extraComponents = data.components ? data.components.data : null;
   const project_name = data.project_description;
   const customer_name = data.project_customer_name;
-
-
 }
 
 
