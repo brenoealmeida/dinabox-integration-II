@@ -1,9 +1,9 @@
 import { useCallback, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import dataToShoppingList from "../helpers/projectDataProcessor";
 import loginApi from "../services/loginApi";
 import projectsApi from "../services/projectsApi";
 import Context from "./Context";
-import dataToShoppingList from "../helpers/projectDataProcessor";
 
 function Provider({children}){
   const [user, setUser] = useState('');
@@ -22,25 +22,40 @@ function Provider({children}){
   }, [navigate, setUser, setLoading, setToken])
 
   const getProjectsById = async (token, ids) => {
-    setLoading(true);
-    console.log(ids);
-    const result = await Object.values(ids).map(async (id) => {
+    const projects = Object.values(ids).map(async (id) => {
       const data = await projectsApi(token, id);
-      return dataToShoppingList(data);
+      console.log(data);
+      return data;
     })
-    setLoading(false);
-    return result;
+    return dataToShoppingList(projects);
   }
+
+  const submitNewList = useCallback( async () => {
+    console.log('inside submitNewList function');
+    setLoading(true)
+    if(Object.keys(ids).length === 0) {
+      navigate('/');
+    }
+    const result = await getProjectsById(token, ids);
+
+    console.log(result)
+
+    setLoading(false);
+    navigate('/list');
+    console.log('finalizou api');
+  }, [navigate, setLoading, ids, token])
 
   const context_value = useMemo(() => ({
     user,
     onLogin,
     token,
     loading,
-    getProjectsById,
+    setLoading,
+   // getProjectsById,
     setIds,
     ids,
-  }), [user, onLogin, token, loading, ids])
+    submitNewList,
+  }), [user, onLogin, token, loading, ids, submitNewList])
 
   return (
     <Context.Provider value={context_value}>

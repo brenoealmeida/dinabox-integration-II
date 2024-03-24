@@ -16,7 +16,7 @@ function Login() {
     const disabled = !login.email || !login.password;
 
     const handleChange = ({target}) => {
-        const { name, value } = target
+        const { name, value } = target;
         setLogin((prev) => {
             return {
                 ...prev,
