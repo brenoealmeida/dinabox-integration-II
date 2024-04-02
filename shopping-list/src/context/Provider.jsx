@@ -48,7 +48,6 @@ function Provider({children}){
     token,
     loading,
     setLoading,
-   // getProjectsById,
     setIds,
     ids,
     submitNewList,
