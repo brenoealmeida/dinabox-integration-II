@@ -21,24 +21,21 @@ function Provider({children}){
     navigate('/new');
   }, [navigate, setUser, setLoading, setToken])
 
-  const getProjectsById = async (token, ids) => {
-    const projects = Object.values(ids).map(async (id) => {
-      const data = await projectsApi(token, id);
-      console.log(data);
-      return data;
-    })
-    return dataToShoppingList(projects);
-  }
-
-  const submitNewList = useCallback( async () => {
+  const submitNewList = useCallback(async () => {
     console.log('inside submitNewList function');
     setLoading(true)
     if(Object.keys(ids).length === 0) {
       navigate('/');
     }
-    const result = await getProjectsById(token, ids);
 
-    console.log(result)
+    const idsArray = Object.values(ids);
+
+    const data = await Promise.all(idsArray.map(async (id) => {
+      const result = await projectsApi(token, id);
+      return result;
+    }));
+
+    console.log(data);
 
     setLoading(false);
     navigate('/list');
