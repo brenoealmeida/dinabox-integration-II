@@ -22,13 +22,35 @@ function jointSystemProcessor(data) {
   })
 }
 
+function componentsProcessor(components) {
+  const result = []
+  Object.values(components).forEach((elem) => {
+    elem.category_data.forEach((e)=> {
+      result.push(
+        {
+          name: e.name,
+          category: e.parent[0].category_name,
+          qt: e.parent[0].qt,
+          dimension: e.parent[0].dimension,
+          width: e.parent[0].width,
+        }
+      ) 
+    })
+  })
+  return result;
+}
+
 
 function dataToShoppingList (data) {
   const jointSystem = data.holes;
   const modules = data.woodwork;
-  const extraComponents = data.components ? data.components.data : null;
+  const components = data.components ? data.components.data : null;
   const project_name = data.project_description;
   const customer_name = data.project_customer_name;
+
+  const teste = componentsProcessor(components);
+  console.log(teste);
+
 }
 
 

@@ -36,10 +36,14 @@ function Provider({children}){
     }));
 
     console.log(data);
+    console.log('finalizou api');
+
+    data.map((project) => {
+      return dataToShoppingList(project);
+    })
 
     setLoading(false);
     navigate('/list');
-    console.log('finalizou api');
   }, [navigate, setLoading, ids, token])
 
   const context_value = useMemo(() => ({
