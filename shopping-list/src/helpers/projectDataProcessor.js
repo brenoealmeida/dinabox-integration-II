@@ -11,10 +11,17 @@ const categories = [
 ]
 
 function modulesProcessor(modules) {
-  const { parts, inputs } = modules;
-
-
+  return modules.flatMap(element => element.inputs)
+    .map((hardware) => ({
+      name: hardware.name,
+      category: hardware.category_name,
+      qt: hardware.qt,
+      dimension: hardware.dimensions,
+      width: null,
+    }))
 }
+
+
 
 function jointSystemProcessor(joints) {
   return joints.map((joint) => ({
@@ -50,7 +57,9 @@ function dataToShoppingList (data) {
   const componentsList = componentsProcessor(components);
 
   const jointsList = jointSystemProcessor(jointSystem);
-  console.log(jointsList);
+  
+  const modulesList = modulesProcessor(modules);
+  console.log(modulesList);
 }
 
 
