@@ -23,21 +23,16 @@ function jointSystemProcessor(data) {
 }
 
 function componentsProcessor(components) {
-  const result = []
-  Object.values(components).forEach((elem) => {
-    elem.category_data.forEach((e)=> {
-      result.push(
-        {
+  return Object.values(components)
+    .flatMap(elem => elem.category_data)
+      .map((e) => ({
           name: e.name,
           category: e.parent[0].category_name,
           qt: e.parent[0].qt,
           dimension: e.parent[0].dimension,
           width: e.parent[0].width,
-        }
-      ) 
-    })
-  })
-  return result;
+        })
+      )
 }
 
 
