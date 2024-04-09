@@ -16,10 +16,14 @@ function modulesProcessor(modules) {
 
 }
 
-function jointSystemProcessor(data) {
-  const result = data.map((component) => {
-    
-  })
+function jointSystemProcessor(joints) {
+  return joints.map((joint) => ({
+    name: joint.name,
+    category: "Sistemas de Fixação",
+    qt: joint.qt,
+    dimension: null,
+    width: null,
+  }))
 }
 
 function componentsProcessor(components) {
@@ -39,13 +43,14 @@ function componentsProcessor(components) {
 function dataToShoppingList (data) {
   const jointSystem = data.holes;
   const modules = data.woodwork;
-  const components = data.components ? data.components.data : null;
+  const components = data.components ? data.components.data : [];
   const project_name = data.project_description;
   const customer_name = data.project_customer_name;
 
-  const teste = componentsProcessor(components);
-  console.log(teste);
+  const componentsList = componentsProcessor(components);
 
+  const jointsList = jointSystemProcessor(jointSystem);
+  console.log(jointsList);
 }
 
 
