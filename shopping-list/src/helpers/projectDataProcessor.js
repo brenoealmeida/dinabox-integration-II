@@ -46,7 +46,6 @@ function componentsProcessor(components) {
       )
 }
 
-
 function dataToShoppingList (data) {
   const jointSystem = data.holes;
   const modules = data.woodwork;
@@ -55,11 +54,16 @@ function dataToShoppingList (data) {
   const customer_name = data.project_customer_name;
 
   const componentsList = componentsProcessor(components);
-
   const jointsList = jointSystemProcessor(jointSystem);
-  
   const modulesList = modulesProcessor(modules);
-  console.log(modulesList);
+
+  const shoppingList = [...componentsList, ...jointsList, ...modulesList];
+
+  return {
+    project_name,
+    customer_name,
+    shoppingList,
+  }
 }
 
 

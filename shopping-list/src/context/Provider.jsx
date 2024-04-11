@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import dataToShoppingList from "../helpers/projectDataProcessor";
+import mergeElements from "../helpers/listProcessor";
 import loginApi from "../services/loginApi";
 import projectsApi from "../services/projectsApi";
 import Context from "./Context";
@@ -22,7 +23,6 @@ function Provider({children}){
   }, [navigate, setUser, setLoading, setToken])
 
   const submitNewList = useCallback(async () => {
-    console.log('inside submitNewList function');
     setLoading(true)
     if(Object.keys(ids).length === 0) {
       navigate('/');
@@ -35,12 +35,17 @@ function Provider({children}){
       return result;
     }));
 
-    console.log(data);
-    console.log('finalizou api');
+    const allLists = []
 
-    data.map((project) => {
-      return dataToShoppingList(project);
+    const allProjects = data.map((project) => {
+      const list = dataToShoppingList(project);
+      allLists.push(list.shoppingList);
+      return list;
     })
+
+    const mergedList = mergeElements(allLists);
+
+    const groupedList
 
     setLoading(false);
     navigate('/list');
