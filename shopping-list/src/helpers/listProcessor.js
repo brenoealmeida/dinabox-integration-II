@@ -1,5 +1,5 @@
 function mergeElements (list) {
-  const result = {}
+  let result = {}
 
   list.forEach((item) => {
     const name = item.name;

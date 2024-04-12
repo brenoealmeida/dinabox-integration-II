@@ -35,17 +35,23 @@ function Provider({children}){
       return result;
     }));
 
-    const allLists = []
+    let allLists = [];
 
     const allProjects = data.map((project) => {
       const list = dataToShoppingList(project);
-      allLists.push(list.shoppingList);
+      allLists = [...allLists, ...list.shoppingList];
       return list;
     })
 
+    console.log(allLists);
+
     const mergedList = mergeElements(allLists);
 
-    const groupedList
+    console.log(mergedList);
+
+    const groupedList = Object.groupBy(mergedList, ({category}) => category);
+
+    console.log(groupedList);
 
     setLoading(false);
     navigate('/list');
