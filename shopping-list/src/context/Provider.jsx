@@ -43,15 +43,9 @@ function Provider({children}){
       return list;
     })
 
-    console.log(allLists);
-
     const mergedList = mergeElements(allLists);
 
-    console.log(mergedList);
-
     const groupedList = Object.groupBy(mergedList, ({category}) => category);
-
-    console.log(groupedList);
 
     setLoading(false);
     navigate('/list');
