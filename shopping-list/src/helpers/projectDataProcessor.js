@@ -58,8 +58,6 @@ function dataToShoppingList (data) {
   const modulesList = modulesProcessor(modules);
 
   const shoppingList = [...componentsList, ...jointsList, ...modulesList];
-
-  console.log(shoppingList);
   
   return {
     project_name,
