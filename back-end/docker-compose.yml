@@ -1,0 +1,13 @@
+version: '3'
+services:
+  node:
+    build: .
+    container_name: shopping-list-app
+    tty: true
+    stdin_open: true
+    command: sh
+    working_dir: /app
+    volumes:
+      - ./:/app
+    ports:
+      - 3006:3000
