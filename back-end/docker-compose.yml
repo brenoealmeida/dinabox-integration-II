@@ -6,8 +6,21 @@ services:
     tty: true
     stdin_open: true
     command: sh
-    working_dir: /app
+    working_dir: /app]
+    env_file: .env
     volumes:
       - ./:/app
     ports:
-      - 3006:3000
+      - 3000:3000
+  db:
+    image: mysql
+    container_name: shopping_list_db
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_PASSWORD=${MYSQLPASSWORD}
+networks:
+  default:
+    name: shopping_list_net
